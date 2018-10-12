@@ -40,7 +40,6 @@ namespace workingasintended
             serialPort1.Write("RESTART");
             Re_declare_variables();
             Re_enable_controls();
-            counter_end += 1;
         }
 
         private void Progressincrease()
