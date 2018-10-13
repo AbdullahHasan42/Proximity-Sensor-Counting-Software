@@ -14,14 +14,16 @@ namespace workingasintended
         int ticks = 0;
         int day = 0;
         int counter_end = 0;
+        string timer_label = "";
 
         public Form1()
         {
             InitializeComponent();
-            getAvailableComPorts();
+            GetAvailableComPorts();
             send_button.Enabled = false;
             richTextBox2.Enabled = false;
             richTextBox1.Enabled = false;
+            restart_button.Enabled = false;
             timer1.Stop();
 
             foreach (string port in ports)
@@ -51,8 +53,8 @@ namespace workingasintended
         {
             BeginInvoke(new EventHandler(delegate{richTextBox1.Text = counter;}));
         }
-        
-        void getAvailableComPorts()
+
+        private void GetAvailableComPorts()
         {
             ports = SerialPort.GetPortNames();
         }
@@ -66,6 +68,7 @@ namespace workingasintended
             send_button.Enabled = false;
             richTextBox1.Enabled = true;
             richTextBox2.Enabled = false;
+            restart_button.Enabled = true;
             timer1.Start();
         }
 
@@ -91,6 +94,7 @@ namespace workingasintended
                 connect_button.Text = "Disconnect";
                 send_button.Enabled = true;
                 richTextBox2.Enabled = true;
+                connect_button.ImageIndex = 1;
             }
             catch(ArgumentException)
             {
@@ -104,6 +108,7 @@ namespace workingasintended
             richTextBox2.Text = "";
             serialPort1.Close();
             connect_button.Text = "Connect";
+            connect_button.ImageIndex = 0;
         }
 
         private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -136,7 +141,7 @@ namespace workingasintended
             }
 
             TimeSpan time_span = TimeSpan.FromSeconds(ticks);
-            string timer_label = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
+            timer_label = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
             label2.Text = timer_label;
             string percentage = ((progressBar1.Value / counter_end) * 100).ToString() + "%";
             percentage_completion.Text = percentage;
@@ -161,14 +166,18 @@ namespace workingasintended
             send_button.Enabled = true;
             richTextBox2.Enabled = true;
         }
+
         /*
-        private void create_log() 
+        private void Create_log() 
         {
-            //Found in the bin folder, with the .exe file
+            //Found in the bin folder, along with the .exe file
 
             string log_date = DateTime.Now.ToString("dd_MM_yyyy");
-            StreamWriter Logger = new StreamWriter("TEST LOG " + log_date + ".txt");
-            Logger.Write("THIS IS A TEST LOG!");
+            StreamWriter Logger = new StreamWriter(part_name + " " + log_date + ".txt");
+            Logger.WriteLine("Part Name: \t" + part_name.Text);
+            Logger.WriteLine("Part Number: \t" + part_number.Text);
+            Logger.WriteLine("Counter reached over target counter: " + counter + "/" + counter_end);
+            Logger.WriteLine("Time taken: " + timer_label);
             Logger.Close();
         }
         */
