@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList_button_icons = new System.Windows.Forms.ImageList(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,8 +39,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.percentage_completion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.part_number = new System.Windows.Forms.TextBox();
@@ -51,17 +49,21 @@
             this.restart_button = new System.Windows.Forms.Button();
             this.connect_button = new System.Windows.Forms.Button();
             this.send_button = new System.Windows.Forms.Button();
+            this.close_button = new System.Windows.Forms.Button();
+            this.imageList_closebutton = new System.Windows.Forms.ImageList(this.components);
+            this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
+            this.label_title = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // imageList1
+            // imageList_button_icons
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Connect.png");
-            this.imageList1.Images.SetKeyName(1, "Disconnect.png");
-            this.imageList1.Images.SetKeyName(2, "glossy-3d-blue-orbs2-045-icon.png");
-            this.imageList1.Images.SetKeyName(3, "glossy-3d-blue-orbs2-053-icon.png");
+            this.imageList_button_icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_button_icons.ImageStream")));
+            this.imageList_button_icons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_button_icons.Images.SetKeyName(0, "Connect.png");
+            this.imageList_button_icons.Images.SetKeyName(1, "Disconnect.png");
+            this.imageList_button_icons.Images.SetKeyName(2, "glossy-3d-blue-orbs2-045-icon.png");
+            this.imageList_button_icons.Images.SetKeyName(3, "glossy-3d-blue-orbs2-053-icon.png");
             // 
             // serialPort1
             // 
@@ -105,20 +107,6 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Minimum = 1;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.Value = 1;
-            // 
-            // percentage_completion
-            // 
-            resources.ApplyResources(this.percentage_completion, "percentage_completion");
-            this.percentage_completion.Name = "percentage_completion";
-            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -142,12 +130,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.groupBox1.Controls.Add(this.part_name);
             this.groupBox1.Controls.Add(this.part_number);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -164,38 +154,92 @@
             // 
             // restart_button
             // 
+            this.restart_button.FlatAppearance.BorderSize = 0;
             resources.ApplyResources(this.restart_button, "restart_button");
-            this.restart_button.ImageList = this.imageList1;
+            this.restart_button.ImageList = this.imageList_button_icons;
             this.restart_button.Name = "restart_button";
             this.restart_button.UseVisualStyleBackColor = true;
             this.restart_button.Click += new System.EventHandler(this.Restart_button_Click);
             // 
             // connect_button
             // 
+            this.connect_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             resources.ApplyResources(this.connect_button, "connect_button");
-            this.connect_button.ImageList = this.imageList1;
+            this.connect_button.FlatAppearance.BorderSize = 0;
+            this.connect_button.ImageList = this.imageList_button_icons;
             this.connect_button.Name = "connect_button";
-            this.connect_button.UseVisualStyleBackColor = true;
+            this.connect_button.UseVisualStyleBackColor = false;
             this.connect_button.Click += new System.EventHandler(this.Connect_button_Click_1);
             // 
             // send_button
             // 
+            this.send_button.FlatAppearance.BorderSize = 0;
             resources.ApplyResources(this.send_button, "send_button");
-            this.send_button.ImageList = this.imageList1;
+            this.send_button.ImageList = this.imageList_button_icons;
             this.send_button.Name = "send_button";
             this.send_button.UseVisualStyleBackColor = true;
             this.send_button.Click += new System.EventHandler(this.Send_button__Click);
+            // 
+            // close_button
+            // 
+            this.close_button.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.close_button, "close_button");
+            this.close_button.ImageList = this.imageList_closebutton;
+            this.close_button.Name = "close_button";
+            this.close_button.UseVisualStyleBackColor = true;
+            this.close_button.Click += new System.EventHandler(this.Close_button_Click);
+            // 
+            // imageList_closebutton
+            // 
+            this.imageList_closebutton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_closebutton.ImageStream")));
+            this.imageList_closebutton.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_closebutton.Images.SetKeyName(0, "Close.png");
+            // 
+            // circularProgressBar1
+            // 
+            resources.ApplyResources(this.circularProgressBar1, "circularProgressBar1");
+            this.circularProgressBar1.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this.circularProgressBar1.AnimationSpeed = 500;
+            this.circularProgressBar1.BackColor = System.Drawing.Color.Transparent;
+            this.circularProgressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.circularProgressBar1.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.circularProgressBar1.InnerMargin = 2;
+            this.circularProgressBar1.InnerWidth = -1;
+            this.circularProgressBar1.MarqueeAnimationSpeed = 2000;
+            this.circularProgressBar1.Name = "circularProgressBar1";
+            this.circularProgressBar1.OuterColor = System.Drawing.Color.Silver;
+            this.circularProgressBar1.OuterMargin = -25;
+            this.circularProgressBar1.OuterWidth = 26;
+            this.circularProgressBar1.ProgressColor = System.Drawing.SystemColors.MenuHighlight;
+            this.circularProgressBar1.ProgressWidth = 25;
+            this.circularProgressBar1.SecondaryFont = new System.Drawing.Font("Haettenschweiler", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.circularProgressBar1.StartAngle = 270;
+            this.circularProgressBar1.Step = 1;
+            this.circularProgressBar1.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.circularProgressBar1.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
+            this.circularProgressBar1.SubscriptText = "";
+            this.circularProgressBar1.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.circularProgressBar1.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
+            this.circularProgressBar1.SuperscriptText = "";
+            this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            // 
+            // label_title
+            // 
+            resources.ApplyResources(this.label_title, "label_title");
+            this.label_title.Name = "label_title";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.Controls.Add(this.label_title);
+            this.Controls.Add(this.circularProgressBar1);
+            this.Controls.Add(this.close_button);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.percentage_completion);
             this.Controls.Add(this.restart_button);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox2);
@@ -204,7 +248,14 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.send_button);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
+            this.Opacity = 0.95D;
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -228,13 +279,15 @@
         private System.Windows.Forms.Button connect_button;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button restart_button;
-        private System.Windows.Forms.Label percentage_completion;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList_button_icons;
         private System.Windows.Forms.TextBox part_number;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox part_name;
+        private System.Windows.Forms.Button close_button;
+        private System.Windows.Forms.ImageList imageList_closebutton;
+        private CircularProgressBar.CircularProgressBar circularProgressBar1;
+        private System.Windows.Forms.Label label_title;
     }
 }
 
