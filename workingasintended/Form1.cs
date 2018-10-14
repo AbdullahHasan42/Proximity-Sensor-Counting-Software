@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Ports;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace workingasintended
@@ -9,12 +10,16 @@ namespace workingasintended
     {
         string counter = "";
         string inputvalue = "";
+        string percentage = "0%";
         bool isConnected = false;
         string[] ports;
         int ticks = 0;
         int day = 0;
         int counter_end = 0;
         string timer_label = "";
+        bool dragging = false;
+        Point dragCursorPoint;
+        Point dragFormPoint;
 
         public Form1()
         {
@@ -24,6 +29,7 @@ namespace workingasintended
             richTextBox2.Enabled = false;
             richTextBox1.Enabled = false;
             restart_button.Enabled = false;
+            circularProgressBar1.Value = 0;
             timer1.Stop();
 
             foreach (string port in ports)
@@ -40,13 +46,13 @@ namespace workingasintended
         private void Restart_button_Click(object sender, EventArgs e)
         {
             serialPort1.Write("RESTART");
-            Re_declare_variables();
+            ReDeclareVariables();
             Re_enable_controls();
         }
 
         private void Progressincrease()
         {
-            BeginInvoke(new EventHandler(delegate{progressBar1.PerformStep();}));
+            BeginInvoke(new EventHandler(delegate{ circularProgressBar1.PerformStep(); }));
         }
 
         private void DisplayToWindow(string counter)
@@ -64,7 +70,7 @@ namespace workingasintended
             inputvalue = richTextBox2.Text;
             serialPort1.Write(inputvalue + "\n");
             counter_end = Int32.Parse(inputvalue);
-            progressBar1.Maximum = counter_end + 1;
+            circularProgressBar1.Maximum = counter_end + 1;
             send_button.Enabled = false;
             richTextBox1.Enabled = true;
             richTextBox2.Enabled = false;
@@ -119,16 +125,17 @@ namespace workingasintended
             {
                 DisplayToWindow(counter);
                 Progressincrease();
+                UpdateTimeAndPercentage();
             }
 
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar1.Value == counter_end)
+            if (circularProgressBar1.Value == counter_end)
             {
                 timer1.Stop();
-                //create_log();
+                Create_log();
                 MessageBox.Show("Test Completed!");
             }
             else
@@ -139,24 +146,27 @@ namespace workingasintended
             {
                 day++;
             }
+        }
 
+        private void UpdateTimeAndPercentage()
+        { 
             TimeSpan time_span = TimeSpan.FromSeconds(ticks);
             timer_label = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
             label2.Text = timer_label;
-            string percentage = ((progressBar1.Value / counter_end) * 100).ToString() + "%";
-            percentage_completion.Text = percentage;
+            percentage = ((circularProgressBar1.Value / counter_end) * 100).ToString() + "%";
+            circularProgressBar1.Text = percentage;
         }
         
-        private void Re_declare_variables()
+        private void ReDeclareVariables()
         {
             counter = "";
             inputvalue = "";
             ticks = 0;
             day = 0;
             counter_end = 0;
-            progressBar1.Value = 1;
-            progressBar1.Maximum = 3;
-            percentage_completion.Text = "0%";
+            circularProgressBar1.Value = 1;
+            circularProgressBar1.Maximum = 3;
+            circularProgressBar1.Text = "0%";
             richTextBox2.ResetText();
             richTextBox1.ResetText();
         }
@@ -167,7 +177,32 @@ namespace workingasintended
             richTextBox2.Enabled = true;
         }
 
-        /*
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(dif));
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+        }
+
+        private void Close_button_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void Create_log() 
         {
             //Found in the bin folder, along with the .exe file
@@ -180,6 +215,5 @@ namespace workingasintended
             Logger.WriteLine("Time taken: " + timer_label);
             Logger.Close();
         }
-        */
     }
 }
