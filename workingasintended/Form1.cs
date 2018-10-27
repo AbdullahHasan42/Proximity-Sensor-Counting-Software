@@ -189,8 +189,6 @@ namespace workingasintended
 
         private void UpdateTimeAndPercentage()
         {
-            BeginInvoke(new EventHandler(delegate
-            {
                 //Formats the ticks variable from (seconds) to (days, HH:MM:SS)
                 TimeSpan time_span = TimeSpan.FromSeconds(ticks);
                 timerLabel = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
@@ -199,7 +197,6 @@ namespace workingasintended
 
                 percentage = ((circularProgressBar1.Value / counterEnd) * 100).ToString();
                 labelPercentage.Text = percentage + "%";
-            }));
         }
 
         private void ResetVariables()
