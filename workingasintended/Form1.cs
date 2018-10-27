@@ -30,7 +30,7 @@ namespace workingasintended
             PopulateComboBox();     //Populates combobox with COM ports found
             buttonSend.Enabled = false;
             richTextBoxTargetCount.Enabled = false;
-            //richTextBoxSerialMonitor.Enabled = false;
+            richTextBoxSerialMonitor.Enabled = false;
             buttonRestart.Enabled = false;
             circularProgressBar1.Value = 0;
         }

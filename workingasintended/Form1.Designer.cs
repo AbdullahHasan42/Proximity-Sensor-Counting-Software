@@ -54,7 +54,6 @@
             this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.label_title = new System.Windows.Forms.Label();
             this.labelPercentage = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox_testDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -226,6 +225,7 @@
             this.circularProgressBar1.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
             this.circularProgressBar1.SuperscriptText = "";
             this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.circularProgressBar1.Value = 3;
             // 
             // label_title
             // 
@@ -238,19 +238,11 @@
             this.labelPercentage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.labelPercentage.Name = "labelPercentage";
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelPercentage);
             this.Controls.Add(this.label_title);
             this.Controls.Add(this.circularProgressBar1);
@@ -308,7 +300,6 @@
         private CircularProgressBar.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.Label labelPercentage;
-        private System.Windows.Forms.Button button1;
     }
 }
 
