@@ -32,28 +32,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.imageList_button_icons = new System.Windows.Forms.ImageList(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxSerialMonitor = new System.Windows.Forms.RichTextBox();
+            this.label_serialMonitor = new System.Windows.Forms.Label();
+            this.comboBoxComPorts = new System.Windows.Forms.ComboBox();
+            this.richTextBoxTargetCount = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.part_number = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.part_name = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.restart_button = new System.Windows.Forms.Button();
-            this.connect_button = new System.Windows.Forms.Button();
-            this.send_button = new System.Windows.Forms.Button();
-            this.close_button = new System.Windows.Forms.Button();
+            this.labelTime = new System.Windows.Forms.Label();
+            this.label_timeElapsed = new System.Windows.Forms.Label();
+            this.label_targetCount = new System.Windows.Forms.Label();
+            this.label_comPorts = new System.Windows.Forms.Label();
+            this.textBoxPartNumber = new System.Windows.Forms.TextBox();
+            this.labelPartName = new System.Windows.Forms.Label();
+            this.groupBox_testDetails = new System.Windows.Forms.GroupBox();
+            this.textBoxPartName = new System.Windows.Forms.TextBox();
+            this.labelPartNumber = new System.Windows.Forms.Label();
+            this.buttonRestart = new System.Windows.Forms.Button();
+            this.buttonConnect = new System.Windows.Forms.Button();
+            this.buttonSend = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.imageList_closebutton = new System.Windows.Forms.ImageList(this.components);
             this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.label_title = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.labelPercentage = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox_testDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList_button_icons
@@ -70,124 +72,125 @@
             this.serialPort1.PortName = "COM6";
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPort1_DataReceived);
             // 
-            // richTextBox1
+            // richTextBoxSerialMonitor
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
-            resources.ApplyResources(this.richTextBox1, "richTextBox1");
-            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBoxSerialMonitor.BackColor = System.Drawing.SystemColors.Window;
+            resources.ApplyResources(this.richTextBoxSerialMonitor, "richTextBoxSerialMonitor");
+            this.richTextBoxSerialMonitor.Name = "richTextBoxSerialMonitor";
+            this.richTextBoxSerialMonitor.ReadOnly = true;
             // 
-            // label1
+            // label_serialMonitor
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.label_serialMonitor, "label_serialMonitor");
+            this.label_serialMonitor.Name = "label_serialMonitor";
             // 
-            // comboBox1
+            // comboBoxComPorts
             // 
-            this.comboBox1.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
+            this.comboBoxComPorts.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxComPorts, "comboBoxComPorts");
+            this.comboBoxComPorts.Name = "comboBoxComPorts";
             // 
-            // richTextBox2
+            // richTextBoxTargetCount
             // 
-            resources.ApplyResources(this.richTextBox2, "richTextBox2");
-            this.richTextBox2.Name = "richTextBox2";
+            resources.ApplyResources(this.richTextBoxTargetCount, "richTextBoxTargetCount");
+            this.richTextBoxTargetCount.Name = "richTextBoxTargetCount";
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // label2
+            // labelTime
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelTime, "labelTime");
+            this.labelTime.Name = "labelTime";
             // 
-            // label3
+            // label_timeElapsed
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.label_timeElapsed, "label_timeElapsed");
+            this.label_timeElapsed.Name = "label_timeElapsed";
             // 
-            // label4
+            // label_targetCount
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.label_targetCount, "label_targetCount");
+            this.label_targetCount.Name = "label_targetCount";
             // 
-            // label5
+            // label_comPorts
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.label_comPorts, "label_comPorts");
+            this.label_comPorts.Name = "label_comPorts";
             // 
-            // part_number
+            // textBoxPartNumber
             // 
-            this.part_number.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.part_number, "part_number");
-            this.part_number.Name = "part_number";
+            this.textBoxPartNumber.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.textBoxPartNumber, "textBoxPartNumber");
+            this.textBoxPartNumber.Name = "textBoxPartNumber";
             // 
-            // label6
+            // labelPartName
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.labelPartName, "labelPartName");
+            this.labelPartName.Name = "labelPartName";
             // 
-            // groupBox1
+            // groupBox_testDetails
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.groupBox1.Controls.Add(this.part_name);
-            this.groupBox1.Controls.Add(this.part_number);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.groupBox_testDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.groupBox_testDetails.Controls.Add(this.textBoxPartName);
+            this.groupBox_testDetails.Controls.Add(this.textBoxPartNumber);
+            this.groupBox_testDetails.Controls.Add(this.labelPartNumber);
+            this.groupBox_testDetails.Controls.Add(this.labelPartName);
+            this.groupBox_testDetails.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.groupBox_testDetails, "groupBox_testDetails");
+            this.groupBox_testDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
+            this.groupBox_testDetails.Name = "groupBox_testDetails";
+            this.groupBox_testDetails.TabStop = false;
             // 
-            // part_name
+            // textBoxPartName
             // 
-            this.part_name.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.part_name, "part_name");
-            this.part_name.Name = "part_name";
+            this.textBoxPartName.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.textBoxPartName, "textBoxPartName");
+            this.textBoxPartName.Name = "textBoxPartName";
             // 
-            // label7
+            // labelPartNumber
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.labelPartNumber, "labelPartNumber");
+            this.labelPartNumber.Name = "labelPartNumber";
             // 
-            // restart_button
+            // buttonRestart
             // 
-            this.restart_button.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.restart_button, "restart_button");
-            this.restart_button.ImageList = this.imageList_button_icons;
-            this.restart_button.Name = "restart_button";
-            this.restart_button.UseVisualStyleBackColor = true;
-            this.restart_button.Click += new System.EventHandler(this.Restart_button_Click);
+            this.buttonRestart.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonRestart, "buttonRestart");
+            this.buttonRestart.ImageList = this.imageList_button_icons;
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.UseVisualStyleBackColor = true;
+            this.buttonRestart.Click += new System.EventHandler(this.ButtonRestart_Click);
             // 
-            // connect_button
+            // buttonConnect
             // 
-            this.connect_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            resources.ApplyResources(this.connect_button, "connect_button");
-            this.connect_button.FlatAppearance.BorderSize = 0;
-            this.connect_button.ImageList = this.imageList_button_icons;
-            this.connect_button.Name = "connect_button";
-            this.connect_button.UseVisualStyleBackColor = false;
-            this.connect_button.Click += new System.EventHandler(this.Connect_button_Click_1);
+            this.buttonConnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            resources.ApplyResources(this.buttonConnect, "buttonConnect");
+            this.buttonConnect.FlatAppearance.BorderSize = 0;
+            this.buttonConnect.ImageList = this.imageList_button_icons;
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.UseVisualStyleBackColor = false;
+            this.buttonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
-            // send_button
+            // buttonSend
             // 
-            this.send_button.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.send_button, "send_button");
-            this.send_button.ImageList = this.imageList_button_icons;
-            this.send_button.Name = "send_button";
-            this.send_button.UseVisualStyleBackColor = true;
-            this.send_button.Click += new System.EventHandler(this.Send_button__Click);
+            this.buttonSend.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonSend, "buttonSend");
+            this.buttonSend.ImageList = this.imageList_button_icons;
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.ButtonSend_Click);
             // 
-            // close_button
+            // buttonClose
             // 
-            this.close_button.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.close_button, "close_button");
-            this.close_button.ImageList = this.imageList_closebutton;
-            this.close_button.Name = "close_button";
-            this.close_button.UseVisualStyleBackColor = true;
-            this.close_button.Click += new System.EventHandler(this.Close_button_Click);
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.ImageList = this.imageList_closebutton;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // imageList_closebutton
             // 
@@ -206,6 +209,7 @@
             this.circularProgressBar1.InnerMargin = 2;
             this.circularProgressBar1.InnerWidth = -1;
             this.circularProgressBar1.MarqueeAnimationSpeed = 2000;
+            this.circularProgressBar1.Maximum = 3;
             this.circularProgressBar1.Name = "circularProgressBar1";
             this.circularProgressBar1.OuterColor = System.Drawing.Color.Silver;
             this.circularProgressBar1.OuterMargin = -25;
@@ -228,26 +232,41 @@
             resources.ApplyResources(this.label_title, "label_title");
             this.label_title.Name = "label_title";
             // 
+            // labelPercentage
+            // 
+            resources.ApplyResources(this.labelPercentage, "labelPercentage");
+            this.labelPercentage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelPercentage.Name = "labelPercentage";
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.labelPercentage);
             this.Controls.Add(this.label_title);
             this.Controls.Add(this.circularProgressBar1);
-            this.Controls.Add(this.close_button);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.restart_button);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.connect_button);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.send_button);
+            this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.groupBox_testDetails);
+            this.Controls.Add(this.label_comPorts);
+            this.Controls.Add(this.label_targetCount);
+            this.Controls.Add(this.buttonRestart);
+            this.Controls.Add(this.label_timeElapsed);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.richTextBoxTargetCount);
+            this.Controls.Add(this.buttonConnect);
+            this.Controls.Add(this.comboBoxComPorts);
+            this.Controls.Add(this.label_serialMonitor);
+            this.Controls.Add(this.richTextBoxSerialMonitor);
+            this.Controls.Add(this.buttonSend);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -256,8 +275,8 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBox_testDetails.ResumeLayout(false);
+            this.groupBox_testDetails.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,29 +284,31 @@
 
         #endregion
 
-        private System.Windows.Forms.Button send_button;
+        private System.Windows.Forms.Button buttonSend;
         public System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button connect_button;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBoxSerialMonitor;
+        private System.Windows.Forms.Label label_serialMonitor;
+        private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Label label_timeElapsed;
+        private System.Windows.Forms.Label label_targetCount;
+        private System.Windows.Forms.Label label_comPorts;
+        private System.Windows.Forms.Label labelPartName;
+        private System.Windows.Forms.Label labelPartNumber;
+        private System.Windows.Forms.ComboBox comboBoxComPorts;
+        private System.Windows.Forms.Button buttonConnect;
+        private System.Windows.Forms.RichTextBox richTextBoxTargetCount;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button restart_button;
+        private System.Windows.Forms.Button buttonRestart;
         private System.Windows.Forms.ImageList imageList_button_icons;
-        private System.Windows.Forms.TextBox part_number;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox part_name;
-        private System.Windows.Forms.Button close_button;
+        private System.Windows.Forms.TextBox textBoxPartNumber;
+        private System.Windows.Forms.GroupBox groupBox_testDetails;
+        private System.Windows.Forms.TextBox textBoxPartName;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.ImageList imageList_closebutton;
         private CircularProgressBar.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Label label_title;
+        private System.Windows.Forms.Label labelPercentage;
+        private System.Windows.Forms.Button button1;
     }
 }
 

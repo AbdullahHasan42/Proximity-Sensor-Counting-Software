@@ -3,20 +3,22 @@ using System.IO;
 using System.IO.Ports;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace workingasintended
 {
     public partial class Form1 : Form
     {
         string counter = "";
-        string inputvalue = "";
+        string inputValue = "";
         string percentage = "0%";
+        string timerLabel = "";
         bool isConnected = false;
         string[] ports;
         int ticks = 0;
         int day = 0;
-        int counter_end = 0;
-        string timer_label = "";
+        int counterEnd = 0;
+        int internalCounter = 1;
         bool dragging = false;
         Point dragCursorPoint;
         Point dragFormPoint;
@@ -25,60 +27,85 @@ namespace workingasintended
         {
             InitializeComponent();
             GetAvailableComPorts();
-            send_button.Enabled = false;
-            richTextBox2.Enabled = false;
-            richTextBox1.Enabled = false;
-            restart_button.Enabled = false;
+            PopulateComboBox();     //Populates combobox with COM ports found
+            buttonSend.Enabled = false;
+            richTextBoxTargetCount.Enabled = false;
+            //richTextBoxSerialMonitor.Enabled = false;
+            buttonRestart.Enabled = false;
             circularProgressBar1.Value = 0;
-            timer1.Stop();
+        }
 
+        private void PopulateComboBox()
+        {
             foreach (string port in ports)
             {
-                comboBox1.Items.Add(port);
+                comboBoxComPorts.Items.Add(port);
                 if (ports[0] != null)
                 {
-                    comboBox1.SelectedItem = ports[0];
+                    comboBoxComPorts.SelectedItem = ports[0];
                 }
             }
-            
         }
 
-        private void Restart_button_Click(object sender, EventArgs e)
+        private void ButtonRestart_Click(object sender, EventArgs e)
         {
             serialPort1.Write("RESTART");
-            ReDeclareVariables();
-            Re_enable_controls();
+            ResetVariables();
+            EnableInputControls();
         }
 
-        private void Progressincrease()
+        private void CircularProgressBarIncrease()
         {
-            BeginInvoke(new EventHandler(delegate{ circularProgressBar1.PerformStep(); }));
+            BeginInvoke(new EventHandler(delegate { circularProgressBar1.PerformStep(); }));
         }
 
-        private void DisplayToWindow(string counter)
+        private void DisplayToSerialMonitor(string counter)
         {
-            BeginInvoke(new EventHandler(delegate{richTextBox1.Text = counter;}));
+            BeginInvoke(new EventHandler(delegate { richTextBoxSerialMonitor.Text = counter; }));
         }
 
         private void GetAvailableComPorts()
         {
             ports = SerialPort.GetPortNames();
         }
-        
-        private void Send_button__Click(object sender, EventArgs e)
+
+        private void ButtonSend_Click(object sender, EventArgs e)
         {
-            inputvalue = richTextBox2.Text;
-            serialPort1.Write(inputvalue + "\n");
-            counter_end = Int32.Parse(inputvalue);
-            circularProgressBar1.Maximum = counter_end + 1;
-            send_button.Enabled = false;
-            richTextBox1.Enabled = true;
-            richTextBox2.Enabled = false;
-            restart_button.Enabled = true;
-            timer1.Start();
+            inputValue = richTextBoxTargetCount.Text;
+
+            if (CheckInputValueForNumeric(inputValue))
+            { 
+                //Reads the input from the richTextBox, sends it over the COM port
+                //then converts it to integer for further comparison
+                serialPort1.Write(inputValue + "\n");
+                counterEnd = Int32.Parse(inputValue);
+                circularProgressBar1.Maximum = counterEnd - 1;
+
+                //Disable unrequired controls and enable restart button, to prevent unwanted inputs
+                buttonSend.Enabled = false;
+                richTextBoxSerialMonitor.Enabled = true;
+                richTextBoxTargetCount.Enabled = false;
+                buttonRestart.Enabled = true;
+
+                timer1.Start();
+            }
         }
 
-        private void Connect_button_Click_1(object sender, EventArgs e)
+        private bool CheckInputValueForNumeric(string inputValueToCheck)
+        {
+            //Checks for Numbers ONLY
+            string pattern = @"^[0-9]{1,1000000}$";
+            Match match = Regex.Match(inputValueToCheck, pattern); 
+                if (match.Success)
+                    return true;
+                else
+                {
+                    MessageBox.Show("Please enter NUMBERS only");
+                    return false;
+                }
+        }
+
+        private void ButtonConnect_Click(object sender, EventArgs e)
         {
             if (!isConnected)
             {
@@ -92,15 +119,21 @@ namespace workingasintended
 
         private void ConnectToArduino()
         {
-            try{
+            try
+            {
                 isConnected = true;
-                string selectedPort = comboBox1.GetItemText(comboBox1.SelectedItem);
+
+                //Capture the selected COM port from comboBox, and open a serial connection to it
+                string selectedPort = comboBoxComPorts.GetItemText(comboBoxComPorts.SelectedItem);
                 serialPort1.PortName = selectedPort;
                 serialPort1.Open();
-                connect_button.Text = "Disconnect";
-                send_button.Enabled = true;
-                richTextBox2.Enabled = true;
-                connect_button.ImageIndex = 1;
+
+                buttonConnect.Text = "Disconnect";
+                buttonConnect.ImageIndex = 1;
+
+                //Enable controls required for target count input
+                buttonSend.Enabled = true;
+                richTextBoxTargetCount.Enabled = true;
             }
             catch(ArgumentException)
             {
@@ -111,32 +144,36 @@ namespace workingasintended
         private void DisconnectFromArduino()
         {
             isConnected = false;
-            richTextBox2.Text = "";
+
+            richTextBoxTargetCount.Text = "";
             serialPort1.Close();
-            connect_button.Text = "Connect";
-            connect_button.ImageIndex = 0;
+
+            buttonConnect.Text = "Connect";
+            buttonConnect.ImageIndex = 0;
         }
 
-        private void SerialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             counter = serialPort1.ReadLine(); // ReadLine includes the + "\n"
+            DisplayToSerialMonitor(counter);
 
             if (counter.StartsWith("Counter ="))
             {
-                DisplayToWindow(counter);
-                Progressincrease();
-                UpdateTimeAndPercentage();
+                internalCounter++;
+                CircularProgressBarIncrease();
             }
 
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (circularProgressBar1.Value == counter_end)
+            //Test stopping condition
+            if (internalCounter == counterEnd)
             {
                 timer1.Stop();
-                Create_log();
+                CreateLog();
                 MessageBox.Show("Test Completed!");
+
             }
             else
             {
@@ -146,36 +183,67 @@ namespace workingasintended
             {
                 day++;
             }
+
+            UpdateTimeAndPercentage();
         }
 
         private void UpdateTimeAndPercentage()
-        { 
-            TimeSpan time_span = TimeSpan.FromSeconds(ticks);
-            timer_label = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
-            label2.Text = timer_label;
-            percentage = ((circularProgressBar1.Value / counter_end) * 100).ToString() + "%";
-            circularProgressBar1.Text = percentage;
+        {
+            BeginInvoke(new EventHandler(delegate
+            {
+                //Formats the ticks variable from (seconds) to (days, HH:MM:SS)
+                TimeSpan time_span = TimeSpan.FromSeconds(ticks);
+                timerLabel = time_span.ToString("%d") + " day(s), " + time_span.ToString(@"hh\:mm\:ss");
+
+                labelTime.Text = timerLabel;
+
+                percentage = ((circularProgressBar1.Value / counterEnd) * 100).ToString();
+                labelPercentage.Text = percentage + "%";
+            }));
         }
-        
-        private void ReDeclareVariables()
+
+        private void ResetVariables()
         {
             counter = "";
-            inputvalue = "";
+            inputValue = "";
             ticks = 0;
             day = 0;
-            counter_end = 0;
+            counterEnd = 0;
             circularProgressBar1.Value = 1;
             circularProgressBar1.Maximum = 3;
             circularProgressBar1.Text = "0%";
-            richTextBox2.ResetText();
-            richTextBox1.ResetText();
+            richTextBoxTargetCount.ResetText();
+            richTextBoxSerialMonitor.ResetText();
         }
 
-        private void Re_enable_controls()
+        private void EnableInputControls()
         {
-            send_button.Enabled = true;
-            richTextBox2.Enabled = true;
+            buttonSend.Enabled = true;
+            richTextBoxTargetCount.Enabled = true;
         }
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void CreateLog()
+        {
+            //Found in the current folder, along with the .exe file
+
+            string log_date = DateTime.Now.ToString("dd_MM_yyyy");
+            string logPath = textBoxPartName.Text + " " + log_date + ".txt";
+            StreamWriter Logger = new StreamWriter(logPath);
+            Logger.WriteLine("Part Name: \t" + textBoxPartName.Text);
+            Logger.WriteLine("Part Number: \t" + textBoxPartNumber.Text);
+            Logger.WriteLine("Counter reached over target counter: " + counter + "/" + counterEnd);
+            Logger.WriteLine("Time taken: " + timerLabel);
+            Logger.Close();
+        }
+
+        //
+        //Code enabling cursor-based free movement of form
+        //
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -193,27 +261,11 @@ namespace workingasintended
             }
         }
 
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            dragging = false;
-        }
+        private void Form1_MouseUp(object sender, MouseEventArgs e) => dragging = false;
 
-        private void Close_button_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void Create_log() 
-        {
-            //Found in the bin folder, along with the .exe file
-
-            string log_date = DateTime.Now.ToString("dd_MM_yyyy");
-            StreamWriter Logger = new StreamWriter(part_name + " " + log_date + ".txt");
-            Logger.WriteLine("Part Name: \t" + part_name.Text);
-            Logger.WriteLine("Part Number: \t" + part_number.Text);
-            Logger.WriteLine("Counter reached over target counter: " + counter + "/" + counter_end);
-            Logger.WriteLine("Time taken: " + timer_label);
-            Logger.Close();
+            MessageBox.Show("NUMBER AT: " + internalCounter.ToString());
         }
     }
 }

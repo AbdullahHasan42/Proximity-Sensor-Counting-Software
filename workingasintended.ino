@@ -32,7 +32,7 @@ void setup()
   Serial.println( counter);
   pinMode(ir_pin,INPUT); 
   pinMode(led,OUTPUT);
-  digitalWrite(led,HIGH);
+  //digitalWrite(led,HIGH);
 }
 
 void loop()
@@ -107,7 +107,7 @@ void loop()
                 //Serial.print (End );
                 lcd.setCursor(0,2);
                 lcd.print(counter);
-                digitalWrite(led,LOW);
+                //digitalWrite(led,LOW);
                 //Serial.println(counter);
                 //start=0;
                inputString = Serial.readString(); //Read for restart Input
@@ -115,7 +115,7 @@ void loop()
             }
             else
             {
-                digitalWrite(led,HIGH);
+                //digitalWrite(led,HIGH);
               
             }
       }
