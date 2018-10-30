@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace workingasintended
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         string counter = "";
         string inputValue = "";
@@ -23,7 +23,7 @@ namespace workingasintended
         Point dragCursorPoint;
         Point dragFormPoint;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             GetAvailableComPorts();
@@ -227,9 +227,9 @@ namespace workingasintended
         private void CreateLog()
         {
             //Found in the current folder, along with the .exe file
-
             string log_date = DateTime.Now.ToString("dd_MM_yyyy");
             string logPath = textBoxPartName.Text + " " + log_date + ".txt";
+
             StreamWriter Logger = new StreamWriter(logPath);
             Logger.WriteLine("Part Name: \t" + textBoxPartName.Text);
             Logger.WriteLine("Part Number: \t" + textBoxPartNumber.Text);
