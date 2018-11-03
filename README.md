@@ -15,3 +15,4 @@ reached over Target Count, as well as the total time taken for the run.
 	- Added a validation method to PartName, to be accepting valid characters for a file name.
 	
 ### TODO:
+	- Add an Interrupt Stop button
