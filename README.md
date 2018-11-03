@@ -12,6 +12,6 @@ reached over Target Count, as well as the total time taken for the run.
 	- Organized parts of the code.
 	- Enabled logger to detect if a similar name exists, to prevent overwriting.
 	- Fixed issue with Restart button sometimes not working.
-	- Added a validation method to PartName, to be accepting valid characters for a file name.
+	- Added a validation method to PartName, to accept valid characters for a file name.
 	
 ### TODO:
