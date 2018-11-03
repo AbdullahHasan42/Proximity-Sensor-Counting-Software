@@ -1,6 +1,6 @@
 ## Description
 
-This application acts as an GUI between an Arduino Mega micro-controller and a PC.  It enables orders for a counting system using a 
+This application acts as a GUI between an Arduino Mega micro-controller and a PC.  It enables orders for a counting system using a 
 proximity sensor to be sent over the serial COM ports. 
 
 It saves a log after a run is completed containing Part Name, Part Number, Count 
