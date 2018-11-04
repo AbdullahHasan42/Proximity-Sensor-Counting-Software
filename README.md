@@ -6,6 +6,11 @@ proximity sensor to be sent over the serial COM ports.
 It saves a log after a run is completed containing Part Name, Part Number, Count 
 reached over Target Count, as well as the total time taken for the run.
 
+<p align="center"> 
+	<img src="ProximitySensorCountingSoftware/PSCS.png" width="350" title="hover text"> 
+	<img src="ProximitySensorCountingSoftware/PSCS.png" width="350" alt="accessibility text"> 
+</p>
+
 ### Updated:
 	- Renamed variable names to be more consistent.
 	- Updated the UI style.
