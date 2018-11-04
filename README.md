@@ -7,8 +7,7 @@ It saves a log after a run is completed containing Part Name, Part Number, Count
 reached over Target Count, as well as the total time taken for the run.
 
 <p align="center"> 
-	<img src="PSCS.png" width="350" title="hover text"> 
-	<img src="PSCS.png" width="350" alt="accessibility text"> 
+	<img src="PSCS.png" width="600" title="PSCS">  
 </p>
 
 ### Updated:
