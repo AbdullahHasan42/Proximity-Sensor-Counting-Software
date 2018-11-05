@@ -331,6 +331,7 @@
             this.circularProgressBar1.SuperscriptText = "";
             this.circularProgressBar1.TabIndex = 0;
             this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.circularProgressBar1.Value = 3;
             // 
             // labelTitle
             // 
@@ -338,9 +339,9 @@
             this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(6, 9);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(419, 37);
+            this.labelTitle.Size = new System.Drawing.Size(485, 37);
             this.labelTitle.TabIndex = 20;
-            this.labelTitle.Text = "Quality Testing Device Controls";
+            this.labelTitle.Text = "Proximity Sensor Counting Software";
             // 
             // labelPercentage
             // 
@@ -421,7 +422,7 @@
             this.Name = "FormMain";
             this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quality Testing Device Controls";
+            this.Text = "PSCS";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseUp);

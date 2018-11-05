@@ -118,7 +118,7 @@ namespace ProximitySensorCountingSoftware
         private bool IsInputValueForNumeric(string inputValueToCheck)
         {
             //Checks for Numbers ONLY
-            string pattern = @"^[0-9]{1,1000000}$";
+            string pattern = @"^[0-9]{1,7}$";
 
             Match match = Regex.Match(inputValueToCheck, pattern);
             if (match.Success)
