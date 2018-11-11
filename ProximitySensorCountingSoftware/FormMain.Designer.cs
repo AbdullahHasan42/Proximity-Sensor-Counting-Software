@@ -221,6 +221,7 @@
             // ButtonRestart
             // 
             this.ButtonRestart.BackColor = System.Drawing.Color.Transparent;
+            this.ButtonRestart.Enabled = false;
             this.ButtonRestart.FlatAppearance.BorderSize = 0;
             this.ButtonRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonRestart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

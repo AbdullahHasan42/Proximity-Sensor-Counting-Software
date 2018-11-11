@@ -4,7 +4,6 @@ using System.IO.Ports;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace ProximitySensorCountingSoftware
 {
@@ -12,13 +11,13 @@ namespace ProximitySensorCountingSoftware
     {
         string serialReader = "";
         string inputValue = "";
-        string percentage = "0%";
+        decimal percentage = 0m;
         string timerLabel = "";
         bool isConnected = false;
         string[] portNames;
         int ticks = 0;
         int day = 0;
-        int targetCount = 0;
+        decimal targetCount = 0m;
         int internalCounter = 0;
         bool dragging = false;
         Point dragCursorPoint;
@@ -101,10 +100,10 @@ namespace ProximitySensorCountingSoftware
 
             if (IsInputValueForNumeric(inputValue) && IsValidFileName(textBoxPartName.Text))
             {
-                //Sends it over the COM port, then converts it to integer for later comparison
+                //Sends Target Count value over the COM port, then converts it to integer for later comparison
                 serialPort1.Write(inputValue);
                 targetCount = Int32.Parse(inputValue);
-                circularProgressBar1.Maximum = targetCount;
+                circularProgressBar1.Maximum = (int)targetCount;
 
                 //Disable unrequired controls to prevent unwanted inputs and enable restart button 
                 ButtonSend.Enabled = false;
@@ -186,9 +185,9 @@ namespace ProximitySensorCountingSoftware
             labelTime.Text = timerLabel;
 
             try
-            {
-                percentage = ((circularProgressBar1.Value / targetCount) * 100).ToString();
-                labelPercentage.Text = percentage + "%";
+            { 
+                percentage = Math.Round((circularProgressBar1.Value / targetCount) * 100, 2);
+                labelPercentage.Text = percentage.ToString() + "%";
             }
             catch(DivideByZeroException)
             {
