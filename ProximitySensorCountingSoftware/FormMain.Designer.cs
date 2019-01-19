@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.imageListButtonIcons = new System.Windows.Forms.ImageList(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.richTextBoxSerialMonitor = new System.Windows.Forms.RichTextBox();
             this.label_serialMonitor = new System.Windows.Forms.Label();
@@ -47,28 +46,19 @@
             this.textBoxPartName = new System.Windows.Forms.TextBox();
             this.labelPartNumber = new System.Windows.Forms.Label();
             this.ButtonRestart = new System.Windows.Forms.Button();
+            this.imageListForIcons = new System.Windows.Forms.ImageList(this.components);
             this.buttonConnect = new System.Windows.Forms.Button();
             this.ButtonSend = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.imageListClosebutton = new System.Windows.Forms.ImageList(this.components);
             this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelPercentage = new System.Windows.Forms.Label();
             this.ButtonCreateLog = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ButtonPause = new System.Windows.Forms.Button();
             this.groupBox_testDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // imageListButtonIcons
-            // 
-            this.imageListButtonIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButtonIcons.ImageStream")));
-            this.imageListButtonIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListButtonIcons.Images.SetKeyName(0, "Connect.png");
-            this.imageListButtonIcons.Images.SetKeyName(1, "Disconnect.png");
-            this.imageListButtonIcons.Images.SetKeyName(2, "glossy-3d-blue-orbs2-045-icon.png");
-            this.imageListButtonIcons.Images.SetKeyName(3, "glossy-3d-blue-orbs2-053-icon.png");
-            this.imageListButtonIcons.Images.SetKeyName(4, "glossy-3d-blue-orbs2-051-icon.png");
             // 
             // serialPort1
             // 
@@ -225,8 +215,8 @@
             this.ButtonRestart.FlatAppearance.BorderSize = 0;
             this.ButtonRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonRestart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonRestart.ImageIndex = 3;
-            this.ButtonRestart.ImageList = this.imageListButtonIcons;
+            this.ButtonRestart.ImageKey = "Restart.png";
+            this.ButtonRestart.ImageList = this.imageListForIcons;
             this.ButtonRestart.Location = new System.Drawing.Point(12, 259);
             this.ButtonRestart.Name = "ButtonRestart";
             this.ButtonRestart.Size = new System.Drawing.Size(107, 95);
@@ -236,6 +226,19 @@
             this.ButtonRestart.UseVisualStyleBackColor = false;
             this.ButtonRestart.Click += new System.EventHandler(this.ButtonRestart_Click);
             // 
+            // imageListForIcons
+            // 
+            this.imageListForIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListForIcons.ImageStream")));
+            this.imageListForIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListForIcons.Images.SetKeyName(0, "Connect.png");
+            this.imageListForIcons.Images.SetKeyName(1, "CreateLog.png");
+            this.imageListForIcons.Images.SetKeyName(2, "Disconnect.png");
+            this.imageListForIcons.Images.SetKeyName(3, "Exit.png");
+            this.imageListForIcons.Images.SetKeyName(4, "Pause.png");
+            this.imageListForIcons.Images.SetKeyName(5, "Resume.png");
+            this.imageListForIcons.Images.SetKeyName(6, "Restart.png");
+            this.imageListForIcons.Images.SetKeyName(7, "Send.png");
+            // 
             // buttonConnect
             // 
             this.buttonConnect.BackColor = System.Drawing.Color.Transparent;
@@ -244,8 +247,8 @@
             this.buttonConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConnect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonConnect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonConnect.ImageIndex = 0;
-            this.buttonConnect.ImageList = this.imageListButtonIcons;
+            this.buttonConnect.ImageKey = "Connect.png";
+            this.buttonConnect.ImageList = this.imageListForIcons;
             this.buttonConnect.Location = new System.Drawing.Point(12, 57);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(107, 95);
@@ -262,8 +265,8 @@
             this.ButtonSend.FlatAppearance.BorderSize = 0;
             this.ButtonSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonSend.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonSend.ImageIndex = 2;
-            this.ButtonSend.ImageList = this.imageListButtonIcons;
+            this.ButtonSend.ImageKey = "Send.png";
+            this.ButtonSend.ImageList = this.imageListForIcons;
             this.ButtonSend.Location = new System.Drawing.Point(10, 158);
             this.ButtonSend.Name = "ButtonSend";
             this.ButtonSend.Size = new System.Drawing.Size(107, 95);
@@ -279,8 +282,8 @@
             this.buttonClose.FlatAppearance.BorderSize = 0;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.ImageIndex = 0;
-            this.buttonClose.ImageList = this.imageListClosebutton;
+            this.buttonClose.ImageKey = "Exit.png";
+            this.buttonClose.ImageList = this.imageListForIcons;
             this.buttonClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.buttonClose.Location = new System.Drawing.Point(12, 359);
             this.buttonClose.Name = "buttonClose";
@@ -290,12 +293,6 @@
             this.buttonClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonClose.UseVisualStyleBackColor = false;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
-            // 
-            // imageListClosebutton
-            // 
-            this.imageListClosebutton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListClosebutton.ImageStream")));
-            this.imageListClosebutton.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListClosebutton.Images.SetKeyName(0, "Close.png");
             // 
             // circularProgressBar1
             // 
@@ -362,8 +359,8 @@
             this.ButtonCreateLog.FlatAppearance.BorderSize = 0;
             this.ButtonCreateLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonCreateLog.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonCreateLog.ImageIndex = 4;
-            this.ButtonCreateLog.ImageList = this.imageListButtonIcons;
+            this.ButtonCreateLog.ImageKey = "CreateLog.png";
+            this.ButtonCreateLog.ImageList = this.imageListForIcons;
             this.ButtonCreateLog.Location = new System.Drawing.Point(125, 259);
             this.ButtonCreateLog.Name = "ButtonCreateLog";
             this.ButtonCreateLog.Size = new System.Drawing.Size(107, 95);
@@ -385,6 +382,24 @@
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
+            // ButtonPause
+            // 
+            this.ButtonPause.BackColor = System.Drawing.Color.Transparent;
+            this.ButtonPause.Enabled = false;
+            this.ButtonPause.FlatAppearance.BorderSize = 0;
+            this.ButtonPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonPause.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonPause.ImageKey = "Pause.png";
+            this.ButtonPause.ImageList = this.imageListForIcons;
+            this.ButtonPause.Location = new System.Drawing.Point(123, 158);
+            this.ButtonPause.Name = "ButtonPause";
+            this.ButtonPause.Size = new System.Drawing.Size(107, 95);
+            this.ButtonPause.TabIndex = 24;
+            this.ButtonPause.Text = "Pause";
+            this.ButtonPause.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ButtonPause.UseVisualStyleBackColor = false;
+            this.ButtonPause.Click += new System.EventHandler(this.ButtonPause_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -394,6 +409,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(970, 457);
+            this.Controls.Add(this.ButtonPause);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ButtonCreateLog);
             this.Controls.Add(this.labelPercentage);
@@ -455,14 +471,14 @@
         private System.Windows.Forms.Label labelPercentage;
         private System.Windows.Forms.ComboBox comboBoxComPorts;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ImageList imageListButtonIcons;
-        private System.Windows.Forms.ImageList imageListClosebutton;
         private System.Windows.Forms.GroupBox groupBox_testDetails;
         private System.Windows.Forms.TextBox textBoxPartNumber;
         private System.Windows.Forms.TextBox textBoxPartName;
         private CircularProgressBar.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Button ButtonCreateLog;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button ButtonPause;
+        private System.Windows.Forms.ImageList imageListForIcons;
     }
 }
 

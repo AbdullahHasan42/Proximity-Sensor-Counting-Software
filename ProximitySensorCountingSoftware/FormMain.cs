@@ -4,6 +4,7 @@ using System.IO.Ports;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace ProximitySensorCountingSoftware
 {
@@ -11,14 +12,16 @@ namespace ProximitySensorCountingSoftware
     {
         string serialReader = "";
         string inputValue = "";
+        string[] portNames;
         decimal percentage = 0m;
+        decimal targetCount = 0m;
         string timerLabel = "";
         bool isConnected = false;
-        string[] portNames;
+        bool isPaused = false;
         int ticks = 0;
         int day = 0;
-        decimal targetCount = 0m;
         int internalCounter = 0;
+
         bool dragging = false;
         Point dragCursorPoint;
         Point dragFormPoint;
@@ -72,7 +75,7 @@ namespace ProximitySensorCountingSoftware
                 serialPort1.Open();
 
                 buttonConnect.Text = "Disconnect";
-                buttonConnect.ImageIndex = 1;
+                buttonConnect.ImageKey = "Disconnect.png";
 
                 //Enable controls required for target count input
                 EnableInputControls();
@@ -91,7 +94,7 @@ namespace ProximitySensorCountingSoftware
             richTextBoxTargetCount.ResetText();
             
             buttonConnect.Text = "Connect";
-            buttonConnect.ImageIndex = 0;
+            buttonConnect.ImageKey = "Connect.png";
         }
 
         private void ButtonSend_Click(object sender, EventArgs e)
@@ -147,7 +150,33 @@ namespace ProximitySensorCountingSoftware
                 return false;
             }
         }
-        
+
+        private void ButtonPause_Click(object sender, EventArgs e)
+        {
+            if (!isPaused)
+            {
+                PauseTest();
+            }
+            else
+            {
+                ResumeTest();
+            }
+        }
+
+        private void PauseTest()
+        {
+            isPaused = true;
+            timer1.Stop();
+            ButtonPause.ImageKey = "Resume.png";
+        }
+
+        private void ResumeTest()
+        {
+            isPaused = false;
+            timer1.Start();
+            ButtonPause.ImageKey = "Pause.png";
+        }
+
         private void Timer1_Tick(object sender, EventArgs e)
         {
             //Test stopping condition
